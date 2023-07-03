@@ -28,9 +28,11 @@ class PhoneBook extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const contacts = this.state.contacts;
-    localStorage.setItem('contacts', JSON.stringify(contacts))
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
   }
 
   // ? add contacts to state with input value
@@ -105,5 +107,7 @@ class PhoneBook extends Component {
     );
   }
 }
+
+
 
 export default PhoneBook;
